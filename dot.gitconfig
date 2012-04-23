@@ -1,0 +1,17 @@
+[user]
+	name = Chris Herborth
+	email = chrish@pobox.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  lg = log -p
+  lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  in = ! git fetch && git log --pretty=short HEAD..origin
+  out = log --pretty=short origin..HEAD
+  unstage = reset HEAD
