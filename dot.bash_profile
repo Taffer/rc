@@ -36,5 +36,9 @@ dir() {
 	ls -BFGhl "$@";
 }
 
+hd() {
+	hexdump -C "$@";
+}
+
 # Words of wisdom, short/SFW version.
 if [ -x /usr/local/bin/fortune ] ; then fortune -s ; fi
