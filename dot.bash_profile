@@ -36,9 +36,14 @@ dir() {
 	ls -BFGhl "$@";
 }
 
+<<<<<<< HEAD
 hd() {
 	hexdump -C "$@";
 }
+=======
+# Make Library visible, since OS X updates always set it to hidden.
+if [ -x /usr/bin/chflags ] ; then chflags nohidden ~/Library ; fi
+>>>>>>> Added a chflags call to force ~/Library to be visible.
 
 # Words of wisdom, short/SFW version.
 if [ -x /usr/local/bin/fortune ] ; then fortune -s ; fi
