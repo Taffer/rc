@@ -27,6 +27,9 @@ export VISUAL=$EDITOR
 
 export PS1='\[\e]0;\h:\w\007\]\u@\h [\!]\$ '
 
+# Tell Python we're OK with UTF-8 output.
+export PYTHONIOENCODING=utf-8
+
 # Handy functions/aliases
 lc() {
 	ls -BCFG "$@";
