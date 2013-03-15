@@ -1,6 +1,6 @@
 # I thought this would be cool for UTF-8 systems. Nope.
 #export LC_ALL=en_US.UTF-8
-export LC_ALL=C
+#export LC_ALL=C
 
 # Klocwork installed?
 if [ -d /usr/local/kw/user/bin ] ; then
@@ -26,6 +26,11 @@ fi
 export VISUAL=$EDITOR
 
 export PS1='\[\e]0;\h:\w\007\]\u@\h [\!]\$ '
+
+# Tell the terminal, etc. we're OK with UTF-8 output.
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 # Tell Python we're OK with UTF-8 output.
 export PYTHONIOENCODING=utf-8
