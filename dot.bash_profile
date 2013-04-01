@@ -25,7 +25,11 @@ else
 fi
 export VISUAL=$EDITOR
 
-export PS1='\[\e]0;\h:\w\007\]\u@\h [\!]\$ '
+if [ "$TERM" = "linux" ] ; then
+    export PS1='\u@\h [\!]\$ '
+else
+    export PS1='\[\e]0;\h:\w\007\]\u@\h [\!]\$ '
+fi
 
 # Tell the terminal, etc. we're OK with UTF-8 output.
 export LC_ALL=en_US.UTF-8
