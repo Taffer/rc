@@ -20,8 +20,10 @@ export CDPATH=.:~
 
 if [ "$(uname)" = "Darwin" ] ; then
     export EDITOR="/usr/bin/edit --wait --resume"
+	COLOUR_LS=""
 else
     export EDITOR=vi
+	COLOUR_LS="--color=auto"
 fi
 export VISUAL=$EDITOR
 
@@ -40,12 +42,13 @@ export LANGUAGE=en_US.UTF-8
 export PYTHONIOENCODING=utf-8
 
 # Handy functions/aliases
+
 lc() {
-	ls -BCFG "$@";
+	ls -BCFG $COLOUR_LS "$@";
 }
 
 dir() {
-	ls -BFGhl "$@";
+	ls -BFGhl $COLOUR_LS "$@";
 }
 
 hd() {
@@ -56,4 +59,4 @@ hd() {
 if [ -x /usr/bin/chflags ] ; then chflags nohidden ~/Library ; fi
 
 # Words of wisdom, short/SFW version.
-if [ -x /usr/local/bin/fortune ] ; then fortune -s ; fi
+if [ -x /usr/local/bin/fortune ] || [ -x /usr/bin/fortune ]; then fortune -s ; fi
