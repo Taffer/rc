@@ -56,3 +56,12 @@ blah
 dispalyed
 demangling
 demangled
+metadata
+telemetry
+synchronize
+decrypting
+authorization
+cassandra
+sarge
+iterable
+parameterized
