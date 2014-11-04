@@ -56,3 +56,10 @@ blah
 dispalyed
 demangling
 demangled
+verbosity
+divvies
+legit
+destructor
+neighbours
+won
+rhombus
