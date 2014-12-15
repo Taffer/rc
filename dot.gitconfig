@@ -1,6 +1,8 @@
 [user]
 	name = Chris Herborth
 	email = chrish@pobox.com
+[core]
+  autocrlf = false
 [color]
 	diff = auto
 	status = auto
