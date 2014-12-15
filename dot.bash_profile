@@ -1,11 +1,5 @@
-# I thought this would be cool for UTF-8 systems. Nope.
-#export LC_ALL=en_US.UTF-8
-#export LC_ALL=C
-
-# Klocwork installed?
-if [ -d /usr/local/kw/user/bin ] ; then
-    export PATH=/usr/local/kw/user/bin:$PATH
-fi
+# Case-insensitive globbing; you need .inputrc as well.
+shopt -s nocaseglob 
 
 # Mac 'brew' version of Python installed?
 if [ -d /usr/local/share/python ] ; then
@@ -20,10 +14,10 @@ export CDPATH=.:~
 
 if [ "$(uname)" = "Darwin" ] ; then
     export EDITOR="/usr/bin/edit --wait --resume"
-	COLOUR_LS=""
+    COLOUR_LS=""
 else
     export EDITOR=vi
-	COLOUR_LS="--color=auto"
+    COLOUR_LS="--color=auto"
 fi
 export VISUAL=$EDITOR
 
