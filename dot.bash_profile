@@ -29,13 +29,20 @@ case "$(uname)" in
         ;;
 
     CYGWIN*)
+        if [ -x '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' ] ; then
+            npp() {
+                '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' $@;
+            }
+            export EDITOR=subl
+        fi
+
         # If Sublime Text 2 is installed, use that instead.
         if [ -x '/cygdrive/c/Program Files/Sublime Text 2/sublime_text.exe' ] ; then
             subl() {
                 '/cygdrive/c/Program Files/Sublime Text 2/sublime_text.exe' $@;
             }
+            export EDITOR=subl
         fi
-        export EDITOR=subl
         ;;
 
     Linux)
