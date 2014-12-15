@@ -65,3 +65,6 @@ cassandra
 sarge
 iterable
 parameterized
+snooze
+frontline
+verbosity
