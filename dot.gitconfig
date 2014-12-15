@@ -3,6 +3,8 @@
 	email = chrish@pobox.com
 [core]
   autocrlf = false
+[push]
+  default = simple
 [color]
 	diff = auto
 	status = auto
