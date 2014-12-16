@@ -33,7 +33,7 @@ case "$(uname)" in
             npp() {
                 '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' $@;
             }
-            export EDITOR=subl
+            export EDITOR=npp
         fi
 
         # If Sublime Text 2 is installed, use that instead.
