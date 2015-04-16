@@ -78,5 +78,9 @@ hd() {
 	hexdump -C "$@";
 }
 
+if [ -e ~/.bashrc ] ; then
+	source .bashrc
+fi
+
 # Words of wisdom, short/SFW version.
 if [ -x /usr/local/bin/fortune ] || [ -x /usr/bin/fortune ]; then fortune -s ; fi
