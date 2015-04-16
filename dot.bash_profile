@@ -79,7 +79,7 @@ hd() {
 }
 
 if [ -e ~/.bashrc ] ; then
-	source .bashrc
+	source ~/.bashrc
 fi
 
 # Words of wisdom, short/SFW version.
