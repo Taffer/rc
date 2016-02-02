@@ -1,21 +1,40 @@
 [user]
-	name = Chris Herborth
-	email = chrish@pobox.com
+    name = Chris Herborth
+    email = chrish@isaracorp.com
 [core]
-  autocrlf = false
+    autocrlf = false
+    excludesfile = /Users/chris.herborth/.gitignore_global
 [push]
-  default = simple
+    default = simple
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+    diff = auto
+    status = auto
+    branch = auto
 [alias]
-  st = status
-  ci = commit
-  br = branch
-  co = checkout
-  lg = log -p
-  lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  in = ! git fetch && git log --pretty=short HEAD..origin
-  out = log --pretty=short origin..HEAD
-  unstage = reset HEAD
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    lg = log -p
+    lsd = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    in = ! git fetch && git log --pretty=short HEAD..origin
+    out = log --pretty=short origin..HEAD
+    unstage = reset HEAD
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path =
+[mergetool "sourcetree"]
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+
+# for $deity's sake, check that anything we're getting is complete and sane on a regular basis
+[transfer]
+    fsckobjects = true
+[fetch]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
