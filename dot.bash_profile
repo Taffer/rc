@@ -7,15 +7,24 @@ if [ -d /usr/local/share/python ] ; then
     export MANPATH=/usr/local/share/man:$MANPATH
 fi
 
+# Golang installed?
+if [ "$(which go)" != "" ] ; then
+        export GOPATH=$(go env GOPATH)
+        if [ -d "${GOPATH}/bin" ] ; then
+                export PATH=$GOPATH/bin:$PATH
+        fi
+fi
+
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export MANPATH=~/man:$MANPATH
 
-export CDPATH=.:~
+# Turns out, this is really annoying...
+#export CDPATH=.:~
 
 # Default prompt.
 export PS1='\[\e]0;\h:\w\007\]\u@\h [\!]\$ '
 
-export EDITOR=vi
+export EDITOR=vim
 COLOUR_LS="--color=auto"
 
 # Platform-specific bits.
@@ -83,4 +92,6 @@ if [ -e ~/.bashrc ] ; then
 fi
 
 # Words of wisdom, short/SFW version.
-if [ -x /usr/local/bin/fortune ] || [ -x /usr/bin/fortune ]; then fortune -s ; fi
+if [ "$(which fortune)" != "" ]; then
+	fortune -s
+fi
