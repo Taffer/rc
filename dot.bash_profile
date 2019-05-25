@@ -1,61 +1,95 @@
-# Case-insensitive globbing; you need .inputrc as well.
-shopt -s nocaseglob 
+#!/usr/bin/bash
 
-# Mac 'brew' version of Python installed?
-if [ -d /usr/local/share/python ] ; then
-    export PATH=/usr/local/share/python:$PATH
-    export MANPATH=/usr/local/share/man:$MANPATH
-fi
+# Case-insensitive globbing; you need .inputrc as well.
+shopt -s nocaseglob
 
 # Golang installed?
-if [ "$(which go)" != "" ] ; then
-        export GOPATH=$(go env GOPATH)
-        if [ -d "${GOPATH}/bin" ] ; then
-                export PATH=$GOPATH/bin:$PATH
-        fi
+if [ "$(command -v go)" != "" ] ; then
+    GOPATH=$(go env GOPATH)
+    export GOPATH
+    if [ -d "${GOPATH}/bin" ] ; then
+        export PATH=$GOPATH/bin:$PATH
+    fi
 fi
 
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export MANPATH=~/man:$MANPATH
 
-# Turns out, this is really annoying...
-#export CDPATH=.:~
-
 # Default prompt.
 export PS1='\[\e]0;\h:\w\007\]\u@\h [\!]\$ '
 
-export EDITOR=vim
+# Make ls better.
 COLOUR_LS="--color=auto"
+if [ -e ~/.dircolors ] && [ -e /usr/bin/dircolors ] ; then
+    # shellcheck source=/dev/null
+    eval "$(/usr/bin/dircolors ~/.dircolors)"
+fi
+
+# Make git better.
+#
+# https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
+if [ -e ~/bin/git-completion.bash ] ; then
+    # shellcheck source=/dev/null
+    source ~/bin/git-completion.bash
+fi
+if [ -e ~/bin/git-prompt.sh ] ; then
+    # shellcheck source=/dev/null
+    source ~/bin/git-prompt.sh
+    export PS1='\[\e[34m\]\w\e[32m$(__git_ps1 " (%s)")\e[39m\n\[\e]0;\h:\w\007\]\u@\h [\!]\$ '
+fi
 
 # Platform-specific bits.
 case "$(uname)" in
     Darwin)
-        export EDITOR="/usr/bin/edit --wait --resume"
+        # Mac hates fun.
         COLOUR_LS=""
 
         # Make Library visible, since OS X updates always set it to hidden.
-        if [ -x /usr/bin/chflags ] ; then chflags nohidden ~/Library ; fi
+        if [ -x /usr/bin/chflags ] ; then
+            chflags nohidden ~/Library
+        fi
+
+        # Mac 'brew' version of Python installed?
+        if [ -d /usr/local/share/python ] ; then
+            export PATH=/usr/local/share/python:$PATH
+            export MANPATH=/usr/local/share/man:$MANPATH
+        fi
+
+        # Use Sublime Text if that's installed.
+        if [ -x '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' ] ; then
+            subl() {
+                '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' "$@";
+            }
+            export EDITOR=subl
+        else
+            # Fallback to old faithful...
+            export EDITOR=vim
+        fi
         ;;
 
     CYGWIN*)
-        if [ -x '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' ] ; then
-            npp() {
-                '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' $@;
-            }
-            export EDITOR=npp
-        fi
-
-        # If Sublime Text 2 is installed, use that instead.
-        if [ -x '/cygdrive/c/Program Files/Sublime Text 2/sublime_text.exe' ] ; then
+        # Use Sublime Text if that's installed.
+        if [ -x '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' ] ; then
             subl() {
-                '/cygdrive/c/Program Files/Sublime Text 2/sublime_text.exe' $@;
+                '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' "$@";
             }
             export EDITOR=subl
+        else
+            if [ -x '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' ] ; then
+                npp() {
+                    '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' "$@";
+                }
+                export EDITOR=npp
+            else
+                # Fallback to old faithful...
+                export EDITOR=vim
+            fi
         fi
         ;;
 
     Linux)
         export PS1='\u@\h [\!]\$ '
+        export EDITOR=vim
         ;;
 
     *)
@@ -63,6 +97,7 @@ case "$(uname)" in
 esac
 
 export VISUAL=$EDITOR
+alias edit='$EDITOR'
 
 # Tell the terminal, etc. we're OK with UTF-8 output.
 # This really depends on your terminal's support for UTF-8.
@@ -87,11 +122,13 @@ hd() {
 	hexdump -C "$@";
 }
 
+# Pull in additional system-specific aliases, functions, etc.
 if [ -e ~/.bashrc ] ; then
+    # shellcheck source=/dev/null
 	source ~/.bashrc
 fi
 
 # Words of wisdom, short/SFW version.
-if [ "$(which fortune)" != "" ]; then
+if [ "$(command -v fortune)" != "" ]; then
 	fortune -s
 fi
