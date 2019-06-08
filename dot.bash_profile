@@ -133,3 +133,8 @@ fi
 if [ "$(command -v fortune)" != "" ]; then
 	fortune -s
 fi
+
+# WSL y u no start in my home?
+if [ "$SHLVL" ] && [ "$SHLVL" = "1" ]; then
+  cd ~
+fi
