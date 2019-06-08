@@ -57,10 +57,11 @@ case "$(uname)" in
 
         # Use Sublime Text if that's installed.
         if [ -x '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' ] ; then
-            subl() {
-                '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' "$@";
+            subl-w() {
+                '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -w "$@";
             }
-            export EDITOR="subl -w"
+            export EDITOR="subl-w"
+            alias subl='/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'
         else
             # Fallback to old faithful...
             export EDITOR=vim
@@ -71,9 +72,9 @@ case "$(uname)" in
         # Use Sublime Text if that's installed.
         if [ -x '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' ] ; then
             subl() {
-                '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' "$@";
+                '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' $(cygpath -m "$@");
             }
-            export EDITOR="subl -w"
+            export EDITOR="subl-w.sh"
         else
             if [ -x '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' ] ; then
                 npp() {
