@@ -1,3 +1,4 @@
-[pep8]
+[pycodestyle]
 max-line-length = 132
 ignore = E501
+statistics = True
