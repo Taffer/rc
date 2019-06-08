@@ -60,7 +60,7 @@ case "$(uname)" in
             subl() {
                 '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' "$@";
             }
-            export EDITOR=subl
+            export EDITOR="subl -w"
         else
             # Fallback to old faithful...
             export EDITOR=vim
@@ -73,7 +73,7 @@ case "$(uname)" in
             subl() {
                 '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' "$@";
             }
-            export EDITOR=subl
+            export EDITOR="subl -w"
         else
             if [ -x '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' ] ; then
                 npp() {
