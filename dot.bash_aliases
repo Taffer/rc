@@ -68,28 +68,7 @@ case "$(uname)" in
         fi
         ;;
 
-    CYGWIN*)
-        # Use Sublime Text if that's installed.
-        if [ -x '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' ] ; then
-            subl() {
-                '/cygdrive/c/Program Files/Sublime Text 3/subl.exe' $(cygpath -m "$@");
-            }
-            export EDITOR="subl-w.sh"
-        else
-            if [ -x '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' ] ; then
-                npp() {
-                    '/cygdrive/c/Program Files (x86)/Notepad++/notepad++.exe' "$@";
-                }
-                export EDITOR=npp
-            else
-                # Fallback to old faithful...
-                export EDITOR=vim
-            fi
-        fi
-        ;;
-
     Linux)
-        export PS1='\u@\h [\!]\$ '
         export EDITOR=vim
         ;;
 
@@ -123,18 +102,8 @@ hd() {
 	hexdump -C "$@";
 }
 
-# Pull in additional system-specific aliases, functions, etc.
-if [ -e ~/.bashrc ] ; then
-    # shellcheck source=/dev/null
-	source ~/.bashrc
-fi
-
 # Words of wisdom, short/SFW version.
 if [ "$(command -v fortune)" != "" ]; then
 	fortune -s
 fi
 
-# WSL y u no start in my home?
-if [ "$SHLVL" ] && [ "$SHLVL" = "1" ]; then
-  cd ~
-fi
