@@ -12,7 +12,7 @@ if [ "$(command -v go)" != "" ] ; then
     fi
 fi
 
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=~/bin:/home/chrish/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export MANPATH=~/man:$MANPATH
 
 # Default prompt.
