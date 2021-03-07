@@ -14,6 +14,7 @@ function crush --description "Use pngcrush -brute to find the smallest possible 
 
                 set t (math $t + $ds)
             else
+                echo "$f - Already crushed!"
                 rm $f.crushed
             end
         end
