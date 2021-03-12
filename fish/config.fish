@@ -6,6 +6,11 @@ if test -d ~/man
     set -x MANPATH ~/man $MANPATH
 end
 
+# Newer brew installs are in /opt/homebrew instead of /usr/local.
+if test -d /opt/homebrew/bin
+    set -x PATH /opt/homebrew/bin $PATH
+end
+
 # Make the prompt less cryptic.
 set -g fish_prompt_pwd_dir_length 78
 
