@@ -8,11 +8,13 @@ function crush --description "Use pngcrush -brute to find the smallest possible 
             set -l ns (stat -c '%s' $f.crushed)
             set -l os (stat -c '%s' $f)
             if test $ns -lt $os
-                set -l ds (math $os - $ns)
-                echo "$f - Saved: $ds bytes"
-                mv $f $f.orig && mv $f.crushed $f && rm $f.orig
+                if test -s $f.crushed
+                    set -l ds (math $os - $ns)
+                    echo "$f - Saved: $ds bytes"
+                    mv $f $f.orig && mv $f.crushed $f && rm $f.orig
 
-                set t (math $t + $ds)
+                    set t (math $t + $ds)
+                end
             else
                 echo "$f - Already crushed!"
                 rm $f.crushed
