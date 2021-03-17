@@ -14,6 +14,9 @@ function crush --description "Use pngcrush -brute to find the smallest possible 
                     mv $f $f.orig && mv $f.crushed $f && rm $f.orig
 
                     set t (math $t + $ds)
+                else
+                    echo "$f - Crushing failed!"
+                    rm $f.crushed
                 end
             else
                 echo "$f - Already crushed!"
