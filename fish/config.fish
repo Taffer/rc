@@ -15,8 +15,13 @@ end
 set -g fish_prompt_pwd_dir_length 78
 
 # Editors
-set -x EDITOR vim
-set -x VISUAL vim
+if command -qs subl
+    set -x EDITOR subl --wait
+    set -x VISUAL subl --wait
+else
+    set -x EDITOR vim
+    set -x VISUAL vim
+end
 
 # Wine
 set -x WINEPREFIX /home/chrish/.wine
