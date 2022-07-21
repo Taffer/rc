@@ -1,6 +1,6 @@
 [user]
 	name = Chris Herborth
-	email = chris.herborth@isara.com
+	email = chrish@pobox.com
 [core]
     autocrlf = false
     excludesfile = /Users/chris.herborth/.gitignore_global
@@ -38,3 +38,5 @@
     fsckobjects = true
 [receive]
     fsckObjects = true
+[pull]
+	rebase = false
